@@ -1,0 +1,4 @@
+{
+  "endpoint": "api/wiggly-labradoodle",
+  "root": "api/curl"
+}
