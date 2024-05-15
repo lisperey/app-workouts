@@ -4,7 +4,10 @@ import { Stack } from 'expo-router';
 import { useState } from "react";
 import { useQuery } from '@tanstack/react-query';
 import { gql } from 'graphql-request';
-import client  from '../graphqlClient'
+import client  from '../graphqlClient';
+import NewSetInput from '../components/NewSetInput';
+import SetsList from '../components/SetsList';
+import ProgressGraph from '../components/ProgressGraph';
 
 const exerciseQuery = gql`
 query exercises($name: String) {
@@ -35,20 +38,42 @@ export default function ExerciseDetailsScreen(){
     }
     const exercise = data.exercises[0];
     return (
-        <ScrollView style={styles.container}>
-            <Stack.Screen options={{title: exercise.name}}/>
+        <View style={styles.container}>
+      <Stack.Screen options={{ title: exercise.name }} />
+
+      <SetsList
+        exerciseName={exercise.name}
+        ListHeaderComponent={() => (
+          <View style={{ gap: 5 }}>
             <View style={styles.panel}>
-                <Text style={styles.exerciseName}>{exercise.name}</Text>
-                <Text style={styles.itemSubtitle}>
-                    <Text style={styles.subValue}>{exercise.muscle}</Text> |{' '}
-                    <Text style={styles.subValue}>{exercise.equipment}</Text>
-                </Text>
+              <Text style={styles.exerciseName}>{exercise.name}</Text>
+
+              <Text style={styles.exerciseSubtitle}>
+                <Text style={styles.subValue}>{exercise.muscle}</Text> |{' '}
+                <Text style={styles.subValue}>{exercise.equipment}</Text>
+              </Text>
             </View>
+
             <View style={styles.panel}>
-                <Text style={styles.instructions} numberOfLines={isInstructionExpanded?0:3}>{exercise.instructions}</Text>
-                <Text onPress={()=>{setIsInstructionExpanded(!isInstructionExpanded)}} style={styles.seemore}>{isInstructionExpanded? 'see less':'see more'}</Text>
+              <Text
+                style={styles.instructions}
+                numberOfLines={isInstructionExpanded ? 0 : 3}
+              >
+                {exercise.instructions}
+              </Text>
+              <Text
+                onPress={() => setIsInstructionExpanded(!isInstructionExpanded)}
+                style={styles.seemore}
+              >
+                {isInstructionExpanded ? 'See less' : 'See more'}
+              </Text>
             </View>
-        </ScrollView>
+
+            <NewSetInput exerciseName={exercise.name} />
+          </View>
+        )}
+      />
+    </View>
     );
 }
 

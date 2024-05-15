@@ -1,0 +1,38 @@
+user: santanafilipe2009
+password: VjhjDCHouNrtnstZ
+jER3EzBL2RxpwXO3v8iChCQF8TH3WXWTJjZOE5YtJNtv6jZERvcI2BNA3JjUZ7x6
+
+stepzen import curl -X POST https://sa-east-1.aws.data.mongodb-api.com/app/data-uqpkdji/endpoint/data/v1/action/find -H 
+"Content-Type: application/json" -H 
+"Access-Control-Request-Headers: *" -H 
+"api-key: jER3EzBL2RxpwXO3v8iChCQF8TH3WXWTJjZOE5YtJNtv6jZERvcI2BNA3JjUZ7x6" 
+-d ' { \"collection\": \"sets\", \"database\": \"workouts\", ]
+\"dataSource\": \"Cluster0\" } '
+
+curl -s "https://sa-east-1.aws.data.mongodb-api.com/app/data-uqpkdji/endpoint/data/v1/action/insertOne" 
+  -X POST 
+  -H "apiKey: jER3EzBL2RxpwXO3v8iChCQF8TH3WXWTJjZOE5YtJNtv6jZERvcI2BNA3JjUZ7x6" 
+  -H 'Content-Type: application/json' 
+  -H "Accept: application/json" 
+  -d '{
+    "dataSource": "Cluster0",
+    "database": "workouts",
+    "collection": "sets",
+    "document": {
+      "exercise": "push",
+      "weight": 4,
+      "reps": 1
+    }
+  }'
+
+  stepzen import curl -X POST https://sa-east-1.aws.data.mongodb-api.com/app/data-uqpkdji/endpoint/data/v1/action/insertOne -H "apiKey: jER3EzBL2RxpwXO3v8iChCQF8TH3WXWTJjZOE5YtJNtv6jZERvcI2BNA3JjUZ7x6" -H "Content-Type: application/json" -H "Accept: application/json" -d 
+'{
+    \"dataSource\": \"Cluster0\",
+    \"database\": \"workouts\",
+    \"collection\": \"sets\",
+    \"document\": {
+      \"exercise\": \"push\",
+      \"weight\": 4,
+      \"reps\": 1
+    }
+  }'

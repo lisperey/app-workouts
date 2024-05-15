@@ -9,7 +9,7 @@ const mutationDocument = gql`
   mutation MyMutation($newSet: NewSet!) {
     insertSet(
       document: $newSet
-      dataSource: "Cluster1"
+      dataSource: "Cluster0"
       database: "workouts"
       collection: "sets"
     ) {
@@ -18,7 +18,7 @@ const mutationDocument = gql`
   }
 `;
 
-const NewSetInput = () => {
+const NewSetInput = ({ exerciseName }) => {
     const [reps, setReps] = useState('');
     const [weight, setWeight] = useState('');
 
@@ -33,10 +33,20 @@ const NewSetInput = () => {
             queryClient.invalidateQueries({ queryKey: ['sets', exerciseName] });
         },
     });
+    console.log(error);
 
     const addSet = () => {
-        console.warn('Add set');
+      const newSet = {
+        username,
+        exercise: exerciseName,
+        reps: Number.parseInt(reps),
+      };
+      if (Number.parseFloat(weight)) {
+        newSet.weight = Number.parseFloat(weight);
+      }
+      mutate(newSet);
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.row}>
@@ -70,6 +80,7 @@ const styles = StyleSheet.create({
     row: {
       flexDirection: 'row',
       gap: 10,
+      alignItems: 'center',
     },
     input: {
       borderWidth: 1,
@@ -77,7 +88,7 @@ const styles = StyleSheet.create({
       padding: 10,
       flex: 1,
       borderRadius: 5,
-    },
+    }
   });
 
 export default NewSetInput;
