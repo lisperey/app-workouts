@@ -22,8 +22,6 @@ const setsQuery = gql`
 const SetsList = ({ ListHeaderComponent, exerciseName }) => {
   const { username } = useAuth();
 
-  console.log(username)
-
   const { data, isLoading } = useQuery({
     queryKey: ['sets', exerciseName],
     queryFn: () =>
